@@ -21,7 +21,7 @@ function Tab(props){
   }
   return(          <div className="tab" onMouseOut={hideHighlight} onMouseMove={moveHighlight}>
   <div className="highlight" style={highlightStyle}/>
-  <a>{props.title}</a>
+  <a>{props.children}</a>
   
 </div>)
 }
@@ -32,9 +32,11 @@ function App() {
     <div className="app">
       <div className="browser">
         <div className="tabs">
-          <Tab title="Home"/>
-          <Tab title='About'/>
-          <Tab title="Featured"/>
+          <Tab><a>Home</a></Tab>
+          <Tab><a>About</a></Tab>
+          <Tab><a>Featured</a></Tab>
+
+          
         </div>
 
         <div className="viewport">Pages Go Here</div>
