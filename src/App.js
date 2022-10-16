@@ -1,47 +1,59 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
+import Tab from './components/Tab';
+import {
+  BrowserRouter,
+  RouterProvider,
+  Route,
+  Switch,
+  Link,
+} from "react-router-dom";
+import Home from './pages/Home';
+import About from './pages/About';
+import Featured from './pages/Featured';
 
-function Tab(props){
 
-  const [highlightStyle,setHightlightStyle]=useState({opacity:0, left:0});
-
-  function moveHighlight(e){
-    console.log(e.nativeEvent.screenX);
-    setHightlightStyle({
-      left:e.nativeEvent.layerX-150, 
-    });
-
-    
-  }
-
-  function hideHighlight(e){
-    setHightlightStyle({
-      opacity:0,
-    })
-  }
-  return(          <div className="tab" onMouseOut={hideHighlight} onMouseMove={moveHighlight}>
-  <div className="highlight" style={highlightStyle}/>
-  <a>{props.children}</a>
-  
-</div>)
-}
 
 function App() {
   
   return (
-    <div className="app">
+    <BrowserRouter>
+      <div className="app">
       <div className="browser">
         <div className="tabs">
-          <Tab><a>Home</a></Tab>
-          <Tab><a>About</a></Tab>
-          <Tab><a>Featured</a></Tab>
+          <Tab>
+            <Link to="/">Home</Link>
+          </Tab>
+          <Tab>
+            <Link to="/about">About</Link>
+          </Tab>
+          <Tab>
+            <Link to="/featured">Featured</Link>
+          </Tab>
 
           
         </div>
 
-        <div className="viewport">Pages Go Here</div>
+        <div className="viewport">
+          <Switch>
+          
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/featured">
+            <Featured />
+          </Route>
+          <Route path="/" exact={true}>
+            <Home />
+          </Route>
+          </Switch>
+        </div>
       </div>
     </div>
+
+
+
+  </BrowserRouter>
   );
 }
 
